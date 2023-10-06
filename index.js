@@ -12,13 +12,13 @@ const heading = document.querySelector("h1");
 form.addEventListener("submit", search);
 
 // Default Location
-let target = "New Delhi";
+let target = "";
 
 // Function to fetch Data from Weather API
 const fetchData = async (target) => {
     try{
     const url = `https://api.weatherapi.com/v1/current.json?key=5b27a6ef3547402582e62007222306&q=${target}`;
-
+      if(target!==""){
     const response = await fetch(url);
     const data = await response.json();
         // if(response.ok){
@@ -33,12 +33,11 @@ const fetchData = async (target) => {
   
       // Calling update Dom Function
       updateDom(temp_c, name, localtime, icon, text);
-    //   heading.innerText = "";
-    
+      heading.innerText = "";
     //   else{
     //     document.getElementById('weather-info').innerHTML = 'City not found.';
     //   }
- 
+    }
   } catch (error) {
     
     alert("Location not found");
@@ -66,7 +65,7 @@ function search(e) {
 
   target = searchField.value.trim();
 
- 
+
     fetchData(target);
     
   
